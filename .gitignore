@@ -13,11 +13,13 @@
 /.env*
 !/.env*.erb
 
+
 # Ignore all logfiles and tempfiles.
 /log/.keep
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/log/*
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
