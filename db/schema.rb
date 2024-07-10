@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_10_010656) do
-  create_table "applications", force: :cascade do |t|
-    t.string "name"
+ActiveRecord::Schema[7.1].define(version: 2024_07_10_053248) do
+  create_table "app_components", force: :cascade do |t|
+    t.boolean "installed"
+    t.integer "app_id"
+    t.integer "component_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_app_components_on_app_id"
+    t.index ["component_id"], name: "index_app_components_on_component_id"
   end
 
   create_table "apps", force: :cascade do |t|
@@ -23,9 +27,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_010656) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+  create_table "components", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "shad_name"
+    t.string "template"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

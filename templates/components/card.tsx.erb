@@ -1,0 +1,21 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+<Card>
+  <CardHeader>
+    <CardTitle><%= @card.title %></CardTitle>
+    <CardDescription><%= @card.description %></CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p><%= @card.content %></p>
+  </CardContent>
+  <CardFooter>
+    <p><%= @card.footer %></p>
+  </CardFooter>
+</Card>
