@@ -14,6 +14,9 @@
 !/.env*.erb
 
 
+projects/*
+!projects/template
+
 # Ignore all logfiles and tempfiles.
 /log/.keep
 /tmp/*

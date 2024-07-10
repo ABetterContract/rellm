@@ -16,6 +16,7 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(application_params)
+    %x|cd projects; npx create-next-app #{@app.name} -e with-supabase|
     if @app.save
       redirect_to @app
     else
