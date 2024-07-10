@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :articles
 
-
+  resources :apps
   # Defines the root path route ("/")
   # root "posts#index"
 end
