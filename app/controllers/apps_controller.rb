@@ -16,15 +16,16 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(application_params)
-    %x|cd projects; npx create-next-app #{@app.name} -e with-supabase; cd #{@app.name}; npx shadcn-ui@latest init -y -d|
-
-    files = %w[app/globals.css app/layout.tsx tailwind.config.ts app/page.tsx]
-
-    files.each do |name|
-      file = File.open("templates/#{name}.erb").read
-      template = ERB.new(file)
-      File.write("projects/#{@app.name}/#{name}", template.result(binding))
+    %x| mkdir -p projects/#{@app.name} projects/#{@app.name}/app projects/#{@app.name}/lib projects/#{@app.name}/public projects/#{@app.name}/components |
+    Dir
+      .glob("base_templates/**/*")
+      .select{|t| t.include?(".erb")}
+      .each do |template_name|
+      puts template_name
+      template = ERB.new(File.open(template_name).read)
+      File.write("projects/#{@app.name}/#{template_name.sub!(".erb", "").sub!("base_templates/", "")}", template.result(binding))
     end
+
 
     if @app.save
       redirect_to @app
