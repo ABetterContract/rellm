@@ -16,7 +16,7 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(application_params)
-    %x| mkdir -p projects/#{@app.name} projects/#{@app.name}/app projects/#{@app.name}/lib projects/#{@app.name}/public projects/#{@app.name}/components |
+    %x| mkdir -p projects/#{@app.name} projects/#{@app.name}/app projects/#{@app.name}/lib projects/#{@app.name}/public projects/#{@app.name}/components/ui projects/#{@app.name}/components/shared |
     Dir
       .glob("base_templates/**/*")
       .select{|t| t.include?(".erb")}

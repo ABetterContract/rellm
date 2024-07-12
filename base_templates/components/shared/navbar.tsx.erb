@@ -1,0 +1,31 @@
+'use client'
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu"
+import Link from "next/link";
+
+export default () => {
+  return (
+    <div className={"flex justify-center items-center w-screen min-h-30 border-b-2 border-accent"}>
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <%= @app.name %>
+              </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+
+    </div>
+  )
+}
