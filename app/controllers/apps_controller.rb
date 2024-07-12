@@ -16,15 +16,24 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(application_params)
-    %x| mkdir -p projects/#{@app.name} projects/#{@app.name}/app projects/#{@app.name}/lib projects/#{@app.name}/public projects/#{@app.name}/components/ui projects/#{@app.name}/components/shared |
+    Dir.glob("base_templates/**/*")
+       .select{|t| !t.include?(".erb")}
+       .each do |folder|
+        %x|mkdir -p projects/#{@app.name}/#{folder.sub!("base_templates/", "")}|
+    end
     Dir
       .glob("base_templates/**/*")
       .select{|t| t.include?(".erb")}
       .each do |template_name|
-      puts template_name
-      template = ERB.new(File.open(template_name).read)
-      File.write("projects/#{@app.name}/#{template_name.sub!(".erb", "").sub!("base_templates/", "")}", template.result(binding))
+
+        template = ERB.new(File.open(template_name).read)
+        puts template_name
+        File.write("projects/#{@app.name}/#{template_name.sub!(".erb", "").sub!("base_templates/", "")}", template.result(binding))
+
+
     end
+
+    %x| cd projects/#{@app.name}; npm i; npx prisma migrate dev --name init|
 
 
     if @app.save
